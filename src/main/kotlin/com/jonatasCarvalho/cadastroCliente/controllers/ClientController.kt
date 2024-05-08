@@ -24,21 +24,21 @@ class ClientController(val logger: Logger) {
     @CrossOrigin
     @GetMapping
     fun getAllClients(): ResponseEntity<MutableList<ClientModel>> {
-        logger.info("Resgatando todos os clientes.")
+        logger.info("Procurando todos os clientes cadastrados...")
         return ResponseEntity.status(HttpStatus.OK).body(clientService.findAll())
     }
 
     @CrossOrigin
-    @GetMapping("/byClientId/{clientId}")
+    @GetMapping("/{clientId}")
     fun getClientById(@PathVariable clientId: String): ResponseEntity<ClientModel> {
-        logger.info("Procurando cliente com o id: $clientId.")
+        logger.info("Procurando cliente com o id: $clientId...")
         return ResponseEntity.status(HttpStatus.OK).body(clientService.findByClientId(clientId))
     }
 
     @CrossOrigin
     @PostMapping
     fun createClient(@RequestBody clientDTO: ClientDTO): ResponseEntity<String> {
-        logger.info("Criando um cliente.")
+        logger.info("Criando um cliente...")
         clientService.save(clientDTO)
         return ResponseEntity.status(HttpStatus.OK).body("Cliente criado com sucesso.")
     }
@@ -46,7 +46,7 @@ class ClientController(val logger: Logger) {
     @CrossOrigin
     @PutMapping("/{clientId}")
     fun updateClient(@PathVariable clientId: String, @RequestBody clientDTO: ClientDTO): ResponseEntity<String> {
-        logger.info("Realizando um update no cliente: $clientId.")
+        logger.info("Realizando um update no cliente: $clientId...")
         var clientFound = clientService.findByClientId(clientId)
 
         clientFound.apply {
@@ -63,7 +63,7 @@ class ClientController(val logger: Logger) {
     @CrossOrigin
     @DeleteMapping("/{clientId}")
     fun deleteClient(@PathVariable clientId: String): ResponseEntity<String> {
-        logger.info("Deletando cliente com o id: $clientId.")
+        logger.info("Deletando cliente com o id: $clientId...")
         var clientFound = clientService.findByClientId(clientId)
 
         clientService.delete(clientFound.clientModeltoDTO())

@@ -6,9 +6,6 @@ spring:
     password: Leonardo16@
   jpa:
     hibernate:
-      #      dialect: org.hibernate.dialect.PostgreSQLDialect
-      #      format_sql: true
-      #      show_sql: true
       ddl-auto: update
   jackson:
     property-naming-strategy: SNAKE_CASE
@@ -17,3 +14,9 @@ server:
   port: 8080
 
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          "*"
