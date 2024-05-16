@@ -26,9 +26,10 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
+
+	//biblioteca do spring que coleta métricas
 	implementation("org.springframework.boot:spring-boot-starter-actuator:3.2.4")
-	// https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus
+	//biblioteca para exportação de métricas
 	implementation("io.micrometer:micrometer-registry-prometheus:1.12.4")
 
 }

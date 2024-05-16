@@ -3,6 +3,7 @@ package com.jonatasCarvalho.cadastroCliente.controllers
 import com.jonatasCarvalho.cadastroCliente.dtos.ClientDTO
 import com.jonatasCarvalho.cadastroCliente.extensionFunctions.clientDTOToModel
 import com.jonatasCarvalho.cadastroCliente.extensionFunctions.clientModeltoDTO
+import com.jonatasCarvalho.cadastroCliente.metrics.MetricLogger
 import com.jonatasCarvalho.cadastroCliente.models.ClientModel
 import com.jonatasCarvalho.cadastroCliente.repositories.ClientRepository
 import com.jonatasCarvalho.cadastroCliente.services.ClientService
@@ -21,9 +22,13 @@ class ClientController(val logger: Logger) {
     @Autowired
     lateinit var clientService: ClientService
 
+    @Autowired
+    private lateinit var metricLogger: MetricLogger
+
     @CrossOrigin
     @GetMapping
     fun getAllClients(): ResponseEntity<MutableList<ClientModel>> {
+        metricLogger.getAllClientsCounterRequest()
         logger.info("Procurando todos os clientes cadastrados...")
         return ResponseEntity.status(HttpStatus.OK).body(clientService.findAll())
     }
@@ -31,6 +36,7 @@ class ClientController(val logger: Logger) {
     @CrossOrigin
     @GetMapping("/{clientId}")
     fun getClientById(@PathVariable clientId: String): ResponseEntity<ClientModel> {
+        metricLogger.getClientByIdRequest()
         logger.info("Procurando cliente com o id: $clientId...")
         return ResponseEntity.status(HttpStatus.OK).body(clientService.findByClientId(clientId))
     }
@@ -38,6 +44,7 @@ class ClientController(val logger: Logger) {
     @CrossOrigin
     @PostMapping
     fun createClient(@RequestBody clientDTO: ClientDTO): ResponseEntity<String> {
+        metricLogger.createClientRequest()
         logger.info("Criando um cliente...")
         clientService.save(clientDTO)
         return ResponseEntity.status(HttpStatus.OK).body("Cliente criado com sucesso.")
@@ -46,6 +53,7 @@ class ClientController(val logger: Logger) {
     @CrossOrigin
     @PutMapping("/{clientId}")
     fun updateClient(@PathVariable clientId: String, @RequestBody clientDTO: ClientDTO): ResponseEntity<String> {
+        metricLogger.updateClientRequest()
         logger.info("Realizando um update no cliente: $clientId...")
         var clientFound = clientService.findByClientId(clientId)
 
@@ -63,6 +71,7 @@ class ClientController(val logger: Logger) {
     @CrossOrigin
     @DeleteMapping("/{clientId}")
     fun deleteClient(@PathVariable clientId: String): ResponseEntity<String> {
+        metricLogger.deleteClientRequest()
         logger.info("Deletando cliente com o id: $clientId...")
         var clientFound = clientService.findByClientId(clientId)
 
