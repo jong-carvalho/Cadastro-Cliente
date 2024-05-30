@@ -3,6 +3,7 @@ package com.jonatasCarvalho.cadastroCliente.controllers
 import com.jonatasCarvalho.cadastroCliente.dtos.ClientDTO
 import com.jonatasCarvalho.cadastroCliente.extensionFunctions.clientDTOToModel
 import com.jonatasCarvalho.cadastroCliente.extensionFunctions.clientModeltoDTO
+import com.jonatasCarvalho.cadastroCliente.metrics.MetricLogger
 import com.jonatasCarvalho.cadastroCliente.models.ClientModel
 import com.jonatasCarvalho.cadastroCliente.repositories.ClientRepository
 import com.jonatasCarvalho.cadastroCliente.services.ClientService
@@ -21,10 +22,14 @@ class ClientController(val logger: Logger) {
     @Autowired
     lateinit var clientService: ClientService
 
+    @Autowired
+    lateinit var metricLogger: MetricLogger
+
     @CrossOrigin
     @GetMapping
     fun getAllClients(): ResponseEntity<MutableList<ClientModel>> {
         logger.info("Procurando todos os clientes cadastrados...")
+        metricLogger.getAllClientsCounterRequest()
         return ResponseEntity.status(HttpStatus.OK).body(clientService.findAll())
     }
 
