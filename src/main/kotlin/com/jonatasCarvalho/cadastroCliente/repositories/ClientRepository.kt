@@ -1,9 +1,9 @@
-package com.jonatasCarvalho.cadastroCliente.repositories
+package com.jonatascarvalho.cadastrocliente.repositories
 
-import com.jonatasCarvalho.cadastroCliente.models.ClientModel
+import com.jonatascarvalho.cadastrocliente.models.ClientModel
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
-import java.util.*
+import java.util.Optional
 
 @Repository
 interface ClientRepository: JpaRepository<ClientModel, Int> {

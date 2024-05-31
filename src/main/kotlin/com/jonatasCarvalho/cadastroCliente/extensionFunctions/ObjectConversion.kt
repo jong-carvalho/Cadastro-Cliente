@@ -1,7 +1,7 @@
-package com.jonatasCarvalho.cadastroCliente.extensionFunctions
+package com.jonatascarvalho.cadastrocliente.extensionFunctions
 
-import com.jonatasCarvalho.cadastroCliente.dtos.ClientDTO
-import com.jonatasCarvalho.cadastroCliente.models.ClientModel
+import com.jonatascarvalho.cadastrocliente.dtos.ClientDTO
+import com.jonatascarvalho.cadastrocliente.models.ClientModel
 
 fun ClientDTO.clientDTOToModel() = ClientModel(
         clientId = clientId,

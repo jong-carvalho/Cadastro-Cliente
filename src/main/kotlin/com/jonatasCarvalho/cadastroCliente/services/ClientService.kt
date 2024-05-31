@@ -1,9 +1,9 @@
-package com.jonatasCarvalho.cadastroCliente.services
+package com.jonatascarvalho.cadastrocliente.services
 
-import com.jonatasCarvalho.cadastroCliente.dtos.ClientDTO
-import com.jonatasCarvalho.cadastroCliente.extensionFunctions.clientDTOToModel
-import com.jonatasCarvalho.cadastroCliente.models.ClientModel
-import com.jonatasCarvalho.cadastroCliente.repositories.ClientRepository
+import com.jonatascarvalho.cadastrocliente.dtos.ClientDTO
+import com.jonatascarvalho.cadastrocliente.extensionFunctions.clientDTOToModel
+import com.jonatascarvalho.cadastrocliente.models.ClientModel
+import com.jonatascarvalho.cadastrocliente.repositories.ClientRepository
 import org.slf4j.Logger
 import org.springframework.stereotype.Service
 

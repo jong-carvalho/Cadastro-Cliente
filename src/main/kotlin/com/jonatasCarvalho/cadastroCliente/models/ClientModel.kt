@@ -1,4 +1,4 @@
-package com.jonatasCarvalho.cadastroCliente.models
+package com.jonatascarvalho.cadastrocliente.models
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
