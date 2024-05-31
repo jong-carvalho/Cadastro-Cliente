@@ -1,19 +1,24 @@
-package com.jonatasCarvalho.cadastroCliente.controllers
+package com.jonatascarvalho.cadastrocliente.controllers
 
-import com.jonatasCarvalho.cadastroCliente.dtos.ClientDTO
-import com.jonatasCarvalho.cadastroCliente.extensionFunctions.clientDTOToModel
-import com.jonatasCarvalho.cadastroCliente.extensionFunctions.clientModeltoDTO
-import com.jonatasCarvalho.cadastroCliente.metrics.MetricLogger
-import com.jonatasCarvalho.cadastroCliente.models.ClientModel
-import com.jonatasCarvalho.cadastroCliente.repositories.ClientRepository
-import com.jonatasCarvalho.cadastroCliente.services.ClientService
+import com.jonatascarvalho.cadastrocliente.dtos.ClientDTO
+import com.jonatascarvalho.cadastrocliente.extensionFunctions.clientModeltoDTO
+import com.jonatascarvalho.cadastrocliente.models.ClientModel
+import com.jonatascarvalho.cadastrocliente.services.ClientService
 import org.slf4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
-import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.DeleteMapping
+
+
 
 @Controller
 @RequestMapping("/clients")
@@ -22,14 +27,10 @@ class ClientController(val logger: Logger) {
     @Autowired
     lateinit var clientService: ClientService
 
-    @Autowired
-    lateinit var metricLogger: MetricLogger
-
     @CrossOrigin
     @GetMapping
     fun getAllClients(): ResponseEntity<MutableList<ClientModel>> {
         logger.info("Procurando todos os clientes cadastrados...")
-        metricLogger.getAllClientsCounterRequest()
         return ResponseEntity.status(HttpStatus.OK).body(clientService.findAll())
     }
 
@@ -52,7 +53,7 @@ class ClientController(val logger: Logger) {
     @PutMapping("/{clientId}")
     fun updateClient(@PathVariable clientId: String, @RequestBody clientDTO: ClientDTO): ResponseEntity<String> {
         logger.info("Realizando um update no cliente: $clientId...")
-        var clientFound = clientService.findByClientId(clientId)
+        val clientFound = clientService.findByClientId(clientId)
 
         clientFound.apply {
             this.clientName = clientDTO.clientName
@@ -69,7 +70,7 @@ class ClientController(val logger: Logger) {
     @DeleteMapping("/{clientId}")
     fun deleteClient(@PathVariable clientId: String): ResponseEntity<String> {
         logger.info("Deletando cliente com o id: $clientId...")
-        var clientFound = clientService.findByClientId(clientId)
+        val clientFound = clientService.findByClientId(clientId)
 
         clientService.delete(clientFound.clientModeltoDTO())
 
