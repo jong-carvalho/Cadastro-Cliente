@@ -28,9 +28,9 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 	//biblioteca do spring que coleta métricas
-	# implementation("org.springframework.boot:spring-boot-starter-actuator:3.2.4")
-	# //biblioteca para exportação de métricas
-	# implementation("io.micrometer:micrometer-registry-prometheus:1.12.4")
+	implementation("org.springframework.boot:spring-boot-starter-actuator:3.2.4")
+	//biblioteca para exportação de métricas
+	implementation("io.micrometer:micrometer-registry-prometheus:1.12.4")
 
 }
 
