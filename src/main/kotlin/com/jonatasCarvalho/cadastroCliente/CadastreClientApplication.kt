@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class CadastreClientApplication
+class CadastroClientApplication
 
 fun main(args: Array<String>) {
-	runApplication<CadastreClientApplication>(*args)
+	runApplication<CadastroClientApplication>(*args)
 }

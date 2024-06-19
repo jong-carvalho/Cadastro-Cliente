@@ -1,9 +1,15 @@
 package com.jonatascarvalho.cadastrocliente.controllers
 
+
+
+import com.jonatascarvalho.cadastrocliente.dtos.OrderDTO
+//import com.jonatascarvalho.cadastrocliente.services.OrderService
 import com.jonatascarvalho.cadastrocliente.dtos.ClientDTO
 import com.jonatascarvalho.cadastrocliente.extensionFunctions.clientModeltoDTO
 import com.jonatascarvalho.cadastrocliente.models.ClientModel
 import com.jonatascarvalho.cadastrocliente.services.ClientService
+import com.jonatascarvalho.cadastrocliente.services.OrderService
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
 import org.slf4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -26,6 +32,9 @@ class ClientController(val logger: Logger) {
 
     @Autowired
     lateinit var clientService: ClientService
+
+    @Autowired
+    lateinit var orderService: OrderService
 
     @CrossOrigin
     @GetMapping
@@ -76,4 +85,13 @@ class ClientController(val logger: Logger) {
 
         return ResponseEntity.status(HttpStatus.OK).body("Cliente deletado com sucesso")
     }
+
+    @CrossOrigin
+    @GetMapping("/orders")
+    fun getAllOrders(): ResponseEntity<Array<OrderDTO>> {
+        logger.info("Procurando todos os pedidos cadastrados...")
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.getAllOrders())
+    }
+
+
 }
